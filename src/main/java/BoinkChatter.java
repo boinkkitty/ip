@@ -7,8 +7,8 @@ public class BoinkChatter {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<>();
 
-        String logo = "Hello! I'm BoinkChatter \n" +
-                "What can I do for you? \n";
+        String logo = "Hello! I'm BoinkChatter\n" +
+                "What can I do for you?\n";
 
         System.out.println(logo);
 
@@ -16,7 +16,7 @@ public class BoinkChatter {
             String input = scanner.nextLine();
 
             if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon! \n");
+                System.out.println("Bye. Hope to see you again soon!\n");
                 break;
             } else if (input.equals("list")) {
                 for (int i = 0; i < tasks.size(); ++i) {
@@ -37,7 +37,7 @@ public class BoinkChatter {
             } else {
                 Task newTask = createTask(input);
                 tasks.add(newTask);
-                System.out.println("Got it. I've added this task: \n"
+                System.out.println("Got it. I've added this task:\n"
                         + newTask + "\n"
                         + "Now you have " + tasks.size() + " tasks in the list");
             }
