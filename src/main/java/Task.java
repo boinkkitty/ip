@@ -1,26 +1,26 @@
-public class Task {
+public abstract class Task {
     private String name;
-    private boolean done;
+    private boolean isDone;
 
     public Task(String name) {
         this.name = name;
-        this.done = false;
+        this.isDone = false;
     }
 
-    public boolean isDone() {
-        return this.done;
+    public boolean checkDone() {
+        return this.isDone;
     }
 
     public void setNotDone() {
-        this.done = false;
+        this.isDone = false;
     }
 
     public void setDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     @Override
     public String toString() {
-        return "[" + (this.done ? "X" : " ") + "] " + this.name;
+        return "[" + (this.isDone ? "X" : " ") + "] " + this.name;
     }
 }
