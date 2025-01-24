@@ -35,6 +35,13 @@ public class BoinkChatter {
                 tasks.get(pos).setDone();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(tasks.get(pos));
+            } else if (input.startsWith("delete")) {
+                String[] parts = input.split(" ");
+                int pos = Integer.parseInt(parts[1]) - 1;
+                Task task = tasks.get(pos);
+                tasks.remove(pos);
+                System.out.println("OK, I've removed this task from the list");
+                System.out.println(task);
             } else {
                 Task newTask = createTask(input);
                 if (newTask != null) {
