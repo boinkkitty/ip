@@ -7,6 +7,10 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public boolean checkDone() {
         return this.isDone;
     }
@@ -18,6 +22,8 @@ public abstract class Task {
     public void setDone() {
         this.isDone = true;
     }
+
+    public abstract String saveTask();
 
     @Override
     public String toString() {

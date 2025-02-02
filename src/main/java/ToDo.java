@@ -4,6 +4,12 @@ public class ToDo extends Task {
     }
 
     @Override
+    public String saveTask() {
+        String output = "E | " + (this.checkDone() ? 1 : 0) + " | " + this.getName();
+        return output;
+    }
+
+    @Override
     public String toString() {
         return "[T] " + super.toString();
     }

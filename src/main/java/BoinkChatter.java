@@ -1,12 +1,11 @@
-import java.sql.SQLOutput;
-import java.util.*;
-import java.util.regex.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class BoinkChatter {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
+        TaskList taskList = new TaskList();
 
         String logo = "Hello! I'm BoinkChatter\n" +
                 "What can I do for you?\n";
@@ -20,36 +19,22 @@ public class BoinkChatter {
                 System.out.println("Bye. Hope to see you again soon!\n");
                 break;
             } else if (input.equals("list")) {
-                for (int i = 0; i < tasks.size(); ++i) {
-                    System.out.println((i + 1) + ". " + tasks.get(i));
-                }
+                System.out.println(taskList.printTasks());
             } else if (input.startsWith("unmark")) {
                 String[] parts = input.split(" ");
                 int pos = Integer.parseInt(parts[1]) - 1;
-                tasks.get(pos).setNotDone();
-                System.out.println("OK, I've marked this task as not done yet:");
-                System.out.println(tasks.get(pos));
+                System.out.println(taskList.unmarkTask(pos));
             } else if (input.startsWith("mark")) {
                 String[] parts = input.split(" ");
                 int pos = Integer.parseInt(parts[1]) - 1;
-                tasks.get(pos).setDone();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(tasks.get(pos));
+                System.out.println(taskList.markTask(pos));
             } else if (input.startsWith("delete")) {
                 String[] parts = input.split(" ");
                 int pos = Integer.parseInt(parts[1]) - 1;
-                Task task = tasks.get(pos);
-                tasks.remove(pos);
-                System.out.println("OK, I've removed this task from the list");
-                System.out.println(task);
+                System.out.println(taskList.deleteTask(pos));
             } else {
                 Task newTask = createTask(input);
-                if (newTask != null) {
-                    tasks.add(newTask);
-                    System.out.println("Got it. I've added this task:\n"
-                            + newTask + "\n"
-                            + "Now you have " + tasks.size() + " tasks in the list");
-                }
+                System.out.println(taskList.addTask(newTask));
             }
         }
     }

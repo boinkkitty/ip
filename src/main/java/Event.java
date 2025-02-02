@@ -9,6 +9,13 @@ public class Event extends Task {
     }
 
     @Override
+    public String saveTask() {
+        String output = "E | " + (this.checkDone() ? 1 : 0) + " | " + this.getName()
+                + " | " + this.start + " | " + this.end;
+        return output;
+    }
+
+    @Override
     public String toString() {
         return "[E] " + super.toString()
                 + " from: " + this.start + " to: " + this.end + ")";
