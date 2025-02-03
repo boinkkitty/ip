@@ -64,7 +64,7 @@ public class TaskList {
     /**
      * Adds task into tasklist and returns output to print.
      * @param task
-     * @return Output to print
+     * @return Print output for added task
      */
 
     public String addTask (Task task) {
@@ -82,17 +82,34 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    /**
+     * Marks task done and returns print output
+     * @param index
+     * @return Print output for marked task
+     */
     public String markTask(int index) {
         tasks.get(index).setDone();
         this.saveTasks();
         return "Nice! I've marked this task as done: \n" + tasks.get(index);
     }
 
+    /**
+     * Unmark task as not done and returns print output
+     * @param index
+     * @return Print output for unmarked task
+     */
+
     public String unmarkTask(int index) {
         this.tasks.get(index).setNotDone();
         this.saveTasks();
         return "OK, I've marked this task as not done yet: \n" + tasks.get(index);
     }
+
+    /**
+     * Delete task and returns print output
+     * @param index
+     * @return Print output for deleted task
+     */
 
     public String deleteTask (int index) {
         Task removedTask = this.tasks.get(index);
@@ -101,12 +118,22 @@ public class TaskList {
         return "OK, I've removed this task from the list \n" + removedTask;
     }
 
+    /**
+     * Create output for printing lists of tasks
+     * @return Print output for list of tasks
+     */
+
     public String printTasks() {
         List<String> output = IntStream.range(0, this.tasks.size()).mapToObj(
                 i -> ((i + 1) + "." + this.tasks.get(i) + "\n"))
                 .collect(Collectors.toList());
         return String.join("", output);
     }
+
+    /**
+     *  Saves task from TaskList into file as text.
+     *  Throws an IOexception if file does not exist.
+     */
 
     public void saveTasks() {
         try {
