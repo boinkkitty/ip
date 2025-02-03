@@ -48,7 +48,7 @@ public class BoinkChatter {
 
             if (input.startsWith("todo")) {
                 String name = input.replaceFirst("todo ","");
-                return new ToDo(name);
+                return new ToDoTask(name);
             } else if (input.startsWith("deadline")) {
                 input = input.replaceFirst("deadline ","");
                 String[] parts = input.split("/by ");
