@@ -1,5 +1,11 @@
+import java.time.LocalDateTime;
+
+/**
+ * This class represents a task with a datetime deadline
+ */
+
 public class Deadline extends Task {
-    private String deadline;
+    private LocalDateTime deadline;
 
     /**
      * Constructor for Deadline class
@@ -7,7 +13,7 @@ public class Deadline extends Task {
      * @param deadline The deadline of task
      */
 
-    public Deadline (String name, String deadline) {
+    public Deadline (String name, LocalDateTime deadline) {
         super(name);
         this.deadline = deadline;
     }
@@ -20,12 +26,12 @@ public class Deadline extends Task {
     @Override
     public String saveTask() {
         String output = "D | " + (this.checkDone() ? 1 : 0) + " | " + this.getName()
-                + " | " + this.deadline;
+                + " | " + super.saveDateTime(this.deadline);
         return output;
     }
 
     @Override
     public String toString() {
-        return "[D] " + super.toString() + " (by: " + this.deadline + ")";
+        return "[D] " + super.toString() + " (by: " + super.getDateTime(this.deadline) + ")";
     }
 }

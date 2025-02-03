@@ -1,23 +1,27 @@
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.File;
 import java.util.Scanner;
-import java.util.stream.IntStream;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
- * This class represents a list containing user's tasks
+ * This class represents a list containing user's tasks.
  */
 
 public class TaskList {
     private ArrayList<Task> tasks = new ArrayList<>();
 
     /**
-     * Constructor for task list
+     * Constructor for task list.
      */
+
     public TaskList() {
         try {
             this.loadTasks("../../../data/data.txt");
@@ -31,6 +35,7 @@ public class TaskList {
      * Throws an exception if file does not exist.
      * @param filePath The location of file to be read from
      */
+
     public void loadTasks(String filePath) throws FileNotFoundException {
         File tasksFile = new File(filePath);
         Scanner scanner = new Scanner(tasksFile);
@@ -40,19 +45,20 @@ public class TaskList {
             String[] parts = line.split("\\|");
 
             if (parts[0].trim().equals("T")) {
-                ToDo todo = new ToDo(parts[2].trim());
+                ToDoTask todo = new ToDoTask(parts[2].trim());
                 if (parts[1].trim().equals("1")) {
                     todo.setDone();
                 }
                 this.tasks.add(todo);
             } else if (parts[0].trim().equals("D")) {
-                Deadline deadline = new Deadline(parts[2].trim(), parts[3].trim());
+                Deadline deadline = new Deadline(parts[2].trim(), createDateTime(parts[3].trim()));
                 if (parts[1].trim().equals("1")) {
                     deadline.setDone();
                 }
                 this.tasks.add(deadline);
             } else if (parts[0].trim().equals("E")) {
-                Event event = new Event(parts[2].trim(), parts[3].trim(), parts[4].trim());
+                Event event = new Event(parts[2].trim(),
+                        createDateTime(parts[3].trim()), createDateTime(parts[4].trim()));
                 if (parts[1].trim().equals("1")) {
                     event.setDone();
                 }
@@ -64,7 +70,7 @@ public class TaskList {
     /**
      * Adds task into tasklist and returns output to print.
      * @param task
-     * @return Print output for added task
+     * @return Print output for added task.
      */
 
     public String addTask (Task task) {
@@ -74,18 +80,14 @@ public class TaskList {
                 + "Now you have " + this.tasks.size() + " tasks in the list \n";
     }
 
-    /**
-     * Returns number of tasks in tasklist.
-     * @return Tasklist size.
-     */
     public int getSize() {
         return this.tasks.size();
     }
 
     /**
-     * Marks task done and returns print output
+     * Marks task done and returns print output.
      * @param index
-     * @return Print output for marked task
+     * @return Print output for marked task.
      */
     public String markTask(int index) {
         tasks.get(index).setDone();
@@ -94,9 +96,9 @@ public class TaskList {
     }
 
     /**
-     * Unmark task as not done and returns print output
+     * Unmark task as not done and returns print output.
      * @param index
-     * @return Print output for unmarked task
+     * @return Print output for unmarked task.
      */
 
     public String unmarkTask(int index) {
@@ -106,9 +108,9 @@ public class TaskList {
     }
 
     /**
-     * Delete task and returns print output
+     * Delete task and returns print output.
      * @param index
-     * @return Print output for deleted task
+     * @return Print output for deleted task.
      */
 
     public String deleteTask (int index) {
@@ -119,8 +121,8 @@ public class TaskList {
     }
 
     /**
-     * Create output for printing lists of tasks
-     * @return Print output for list of tasks
+     * Create output for printing lists of tasks.
+     * @return Print output for list of tasks.
      */
 
     public String printTasks() {
@@ -147,5 +149,17 @@ public class TaskList {
         } catch (IOException e) {
             System.out.println("Error occurred while saving tasks to file " + e.getMessage());
         }
+    }
+
+    /**
+     * Creates LocalDatetime object from String input (dd/MM/yyyy HHmm).
+     * Throws DateTimeParseException if input format is incorrect.
+     * @param input String datetime (dd/MM/yyyy HHmm).
+     * @return LocalDateTime object.
+     * @throws DateTimeParseException
+     */
+    public static LocalDateTime createDateTime(String input) throws DateTimeParseException {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        return LocalDateTime.parse(input, format);
     }
 }

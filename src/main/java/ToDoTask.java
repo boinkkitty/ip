@@ -1,8 +1,12 @@
+/**
+ * This class represents a task without deadline.
+ */
+
 public class ToDoTask extends Task {
 
     /**
-     * Constructor for ToDoTask class
-     * @param name The name of task
+     * Constructor for ToDoTask class.
+     * @param name The name of task.
      */
 
     public ToDoTask (String name) {
@@ -10,8 +14,8 @@ public class ToDoTask extends Task {
     }
 
     /**
-     * Creates output in format for saving task
-     * @return Task to save to file
+     * Creates output in format for saving task.
+     * @return Task to save to file.
      */
 
     @Override
