@@ -1,11 +1,22 @@
 public class ToDo extends Task {
+
+    /**
+     * Constructor for ToDo class
+     * @param name The name of task
+     */
+
     public ToDo (String name) {
         super(name);
     }
 
+    /**
+     * Creates output in format for saving task
+     * @return Task to save to file
+     */
+
     @Override
     public String saveTask() {
-        String output = "E | " + (this.checkDone() ? 1 : 0) + " | " + this.getName();
+        String output = "T | " + (this.checkDone() ? 1 : 0) + " | " + this.getName();
         return output;
     }
 
