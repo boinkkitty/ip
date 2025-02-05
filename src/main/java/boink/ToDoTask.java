@@ -1,3 +1,5 @@
+package boink;
+
 /**
  * This class represents a task without deadline.
  */

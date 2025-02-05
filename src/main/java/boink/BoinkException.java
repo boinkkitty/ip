@@ -1,5 +1,7 @@
+package boink;
+
 /**
- * This class represents Exceptions thrown by BoinkChatter.
+ * This class represents Exceptions thrown by Boink.
  */
 
 public class BoinkException extends Exception {
@@ -13,4 +15,8 @@ public class BoinkException extends Exception {
         super(msg);
     }
 
+    @Override
+    public String getMessage() {
+        return super.getMessage();
+    }
 }

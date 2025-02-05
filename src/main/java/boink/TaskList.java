@@ -1,13 +1,10 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+package boink;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -16,55 +13,22 @@ import java.util.stream.IntStream;
  */
 
 public class TaskList {
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks;
 
     /**
      * Constructor for task list.
      */
 
     public TaskList() {
-        try {
-            this.loadTasks("../../../data/data.txt");
-        } catch (FileNotFoundException e) {
-            System.out.println("Error loading tasks! " + e.getMessage());
-        }
+        this.tasks = new ArrayList<>();
     }
 
     /**
-     * Loads tasks from file into ArrayList<Task> tasks.
-     * Throws an exception if file does not exist.
-     * @param filePath The location of file to be read from
+     * Loads task into tasklist.
+     * @param task Task to load.
      */
-
-    public void loadTasks(String filePath) throws FileNotFoundException {
-        File tasksFile = new File(filePath);
-        Scanner scanner = new Scanner(tasksFile);
-
-        while (scanner.hasNext()) {
-            String line = scanner.nextLine();
-            String[] parts = line.split("\\|");
-
-            if (parts[0].trim().equals("T")) {
-                ToDoTask todo = new ToDoTask(parts[2].trim());
-                if (parts[1].trim().equals("1")) {
-                    todo.setDone();
-                }
-                this.tasks.add(todo);
-            } else if (parts[0].trim().equals("D")) {
-                Deadline deadline = new Deadline(parts[2].trim(), createDateTime(parts[3].trim()));
-                if (parts[1].trim().equals("1")) {
-                    deadline.setDone();
-                }
-                this.tasks.add(deadline);
-            } else if (parts[0].trim().equals("E")) {
-                Event event = new Event(parts[2].trim(),
-                        createDateTime(parts[3].trim()), createDateTime(parts[4].trim()));
-                if (parts[1].trim().equals("1")) {
-                    event.setDone();
-                }
-                this.tasks.add(event);
-            }
-        }
+    public void loadTask(Task task) {
+        this.tasks.add(task);
     }
 
     /**
@@ -89,6 +53,7 @@ public class TaskList {
      * @param index
      * @return Print output for marked task.
      */
+
     public String markTask(int index) {
         tasks.get(index).setDone();
         this.saveTasks();
@@ -133,22 +98,17 @@ public class TaskList {
     }
 
     /**
-     *  Saves task from TaskList into file as text.
-     *  Throws an IOexception if file does not exist.
+     *
+     *  Returns tasks from TaskList as string to save into file.
+     * @return String output to save
      */
 
-    public void saveTasks() {
-        try {
-            FileWriter fw = new FileWriter("../../../data/data.txt", false);
-            StringBuilder sb = new StringBuilder();
-            for (Task task: tasks) {
-                sb.append(task.saveTask() + "\n");
-            }
-            fw.write(sb.toString());
-            fw.close();
-        } catch (IOException e) {
-            System.out.println("Error occurred while saving tasks to file " + e.getMessage());
+    public String saveTasks() {
+        StringBuilder sb = new StringBuilder();
+        for (Task task: tasks) {
+            sb.append(task.saveTask() + "\n");
         }
+        return sb.toString();
     }
 
     /**
