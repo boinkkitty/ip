@@ -1,4 +1,4 @@
-package boink;
+package boink.exceptions;
 
 public class TaskInputException extends BoinkException {
     public TaskInputException(String m) {

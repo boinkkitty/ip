@@ -1,4 +1,9 @@
-package boink;
+package boink.commands;
+
+import boink.Storage;
+import boink.tasks.Task;
+import boink.TaskList;
+import boink.Ui;
 
 public class AddCommand extends Command {
     private Task task;

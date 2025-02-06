@@ -1,4 +1,4 @@
-package boink;
+package boink.tasks;
 
 import java.time.LocalDateTime;
 

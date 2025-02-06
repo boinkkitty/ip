@@ -1,5 +1,8 @@
 package boink;
 
+import boink.commands.Command;
+import boink.exceptions.BoinkException;
+
 import java.io.FileNotFoundException;
 
 /**
@@ -46,7 +49,7 @@ public class Boink {
     }
 
     public static void main(String[] args) {
-        new Boink("../../../data/data.txt").run();
+        new Boink("./data/data.txt").run();
     }
 }
 

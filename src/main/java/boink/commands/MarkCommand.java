@@ -1,4 +1,8 @@
-package boink;
+package boink.commands;
+
+import boink.Storage;
+import boink.TaskList;
+import boink.Ui;
 
 public class MarkCommand extends Command {
     private int index;

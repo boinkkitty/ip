@@ -1,4 +1,4 @@
-package boink;
+package boink.tasks;
 
 /**
  * This class represents a task without deadline.

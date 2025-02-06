@@ -1,5 +1,10 @@
 package boink;
 
+import boink.tasks.Deadline;
+import boink.tasks.Event;
+import boink.tasks.Task;
+import boink.tasks.ToDoTask;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
