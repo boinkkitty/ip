@@ -30,7 +30,7 @@ public class Event extends Task {
 
     @Override
     public String saveTask() {
-        String output = "E | " + (this.checkDone() ? 1 : 0) + " | " + this.getName()
+        String output = "E | " + (this.isDone() ? 1 : 0) + " | " + this.getName()
                 + " | " + super.saveDateTime(this.start) + " | " + super.saveDateTime(this.end);
         return output;
     }

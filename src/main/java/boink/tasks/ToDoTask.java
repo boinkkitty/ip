@@ -22,7 +22,7 @@ public class ToDoTask extends Task {
 
     @Override
     public String saveTask() {
-        String output = "T | " + (this.checkDone() ? 1 : 0) + " | " + this.getName();
+        String output = "T | " + (this.isDone() ? 1 : 0) + " | " + this.getName();
         return output;
     }
 
