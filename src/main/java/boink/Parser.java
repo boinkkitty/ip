@@ -18,6 +18,13 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
+    /**
+     * Parses user input entry into a command to be executed.
+     * @param command User command.
+     * @return Command to be executed.
+     * @throws BoinkException If user enters empty input, invalid date format or task format
+     */
+
     public static Command parse (String command) throws BoinkException {
         String[] parts = command.split(" ");
 
@@ -56,6 +63,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Creates task from user input.
+     * @param input User input entry.
+     * @return Task to be created from user input.
+     * @throws BoinkException If user did not state any task details.
+     * @throws DateTimeParseException If date input format is invalid.
+     */
+
     private static Task parseTaskFromInput(String input) throws BoinkException, DateTimeParseException {
         String[] check = input.split(" ");
         if (check.length <= 1) {
@@ -91,8 +106,10 @@ public class Parser {
      * @return LocalDateTime object.
      * @throws DateTimeParseException thrown if input format is incorrect.
      */
+
     public static LocalDateTime createDateTime(String input) throws DateTimeParseException {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         return LocalDateTime.parse(input, format);
     }
+
 }

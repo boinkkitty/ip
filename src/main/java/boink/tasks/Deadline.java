@@ -21,8 +21,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Creates output in format for saving task
-     * @return Task to save to file
+     * Creates output in format for saving task.
+     * @return Task as string to write to file.
      */
 
     @Override

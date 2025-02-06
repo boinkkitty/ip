@@ -25,7 +25,7 @@ public class Event extends Task {
 
     /**
      * Creates output in format for saving task.
-     * @return Task to save to file
+     * @return Task as string to write to file.
      */
 
     @Override

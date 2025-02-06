@@ -4,9 +4,17 @@ import boink.Storage;
 import boink.TaskList;
 import boink.Ui;
 
+/**
+ * This class represents the command to delete a task.
+ */
+
 public class DeleteCommand extends Command {
     private int index;
 
+    /**
+     * Constructor for DeleteCommand
+     * @param index Index of task to delete
+     */
     public DeleteCommand (int index) {
         this.index = index;
     }

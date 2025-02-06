@@ -6,7 +6,7 @@ import boink.exceptions.BoinkException;
 import java.io.FileNotFoundException;
 
 /**
- * This class represents the Boink bot
+ * This class represents an instance of Boink bot
  */
 
 public class Boink {
@@ -14,6 +14,11 @@ public class Boink {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    /**
+     * Public constructor for Boink bot.
+     * @param filePath Path to file for task loading.
+     */
 
     public Boink(String filePath) {
         this.ui = new Ui();
@@ -27,6 +32,10 @@ public class Boink {
             ui.showLoadingError();
         }
     }
+
+    /**
+     * Runs application and starts user interaction
+     */
 
     public void run() {
         ui.showWelcome();

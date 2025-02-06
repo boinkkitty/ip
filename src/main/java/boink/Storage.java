@@ -28,10 +28,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+
     /**
-     * Loads tasks from file into ArrayList<Task> tasks.
-     * Throws an exception if file does not exist.
-     * @param tasklist The location of file to be read from
+     * Loads tasks from file into taskList.
+     * @param tasklist Tasklist to load tasks from file into.
+     * @throws FileNotFoundException If file does not exist.
      */
 
     public void loadTasksFromFile(TaskList tasklist) throws FileNotFoundException {
@@ -45,6 +46,13 @@ public class Storage {
         }
     }
 
+
+    /**
+     * Writes tasks from taskList into file
+     * IOException thrown and caught if error occurred.
+     * @param taskList Tasklist to read tasks for writing.
+     */
+
     public void saveTasksToFile(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(filePath, false);
@@ -55,6 +63,12 @@ public class Storage {
             System.out.println("Error occurred while saving tasks to file " + e.getMessage());
         }
     }
+
+    /**
+     * Parse file entry into tasks for loading to tasklist.
+     * @param input Entry to be parsed.
+     * @return Task to be loaded.
+     */
 
     private Task parseTaskLog(String input) {
         String[] parts = input.split("\\|");

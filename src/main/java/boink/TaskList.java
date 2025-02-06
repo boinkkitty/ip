@@ -35,7 +35,7 @@ public class TaskList {
 
     /**
      * Adds task into tasklist and returns output to print.
-     * @param task
+     * @param task Task to add.
      * @return Print output for added task.
      */
 
@@ -100,8 +100,7 @@ public class TaskList {
     }
 
     /**
-     *
-     *  Returns tasks from TaskList as string to save into file.
+     * Returns tasks from TaskList as string to save into file.
      * @return String output to save
      */
 
@@ -118,7 +117,7 @@ public class TaskList {
      * Throws DateTimeParseException if input format is incorrect.
      * @param input String datetime (dd/MM/yyyy HHmm).
      * @return LocalDateTime object.
-     * @throws DateTimeParseException
+     * @throws DateTimeParseException If datetime input format is wrong.
      */
     public static LocalDateTime createDateTime(String input) throws DateTimeParseException {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");

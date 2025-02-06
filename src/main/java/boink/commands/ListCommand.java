@@ -4,6 +4,10 @@ import boink.Storage;
 import boink.TaskList;
 import boink.Ui;
 
+/**
+ * This class represents the command to list all tasks.
+ */
+
 public class ListCommand extends Command {
 
     @Override
