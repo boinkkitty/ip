@@ -22,6 +22,8 @@ public class Parser {
         String[] parts = command.split(" ");
 
         switch (parts[0]) {
+        case "":
+            throw new BoinkException("Empty input. Please enter a valid command!");
         case "bye":
             if (parts.length == 1) {
                 return new EndCommand();

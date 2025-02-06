@@ -40,7 +40,7 @@ public class Storage {
 
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
-            Task task = this.parseTaskFromFile(line);
+            Task task = this.parseTaskLog(line);
             tasklist.loadTask(task);
         }
     }
@@ -56,7 +56,7 @@ public class Storage {
         }
     }
 
-    private Task parseTaskFromFile(String input) {
+    private Task parseTaskLog(String input) {
         String[] parts = input.split("\\|");
         boolean isDone = parts[1].trim().equals("1");
         switch (parts[0].trim()) {
