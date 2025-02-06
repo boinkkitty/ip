@@ -27,7 +27,7 @@ public class Deadline extends Task {
 
     @Override
     public String saveTask() {
-        String output = "D | " + (this.checkDone() ? 1 : 0) + " | " + this.getName()
+        String output = "D | " + (this.isDone() ? 1 : 0) + " | " + this.getName()
                 + " | " + super.saveDateTime(this.deadline);
         return output;
     }

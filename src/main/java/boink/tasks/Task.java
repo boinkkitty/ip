@@ -25,7 +25,7 @@ public abstract class Task {
         return this.name;
     }
 
-    public boolean checkDone() {
+    public boolean isDone() {
         return this.isDone;
     }
 
