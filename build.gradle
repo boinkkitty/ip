@@ -34,6 +34,7 @@ application {
 shadowJar {
     archiveBaseName = "boink"
     archiveClassifier = null
+    archiveFileName = 'boink.jar'
 }
 
 run{
