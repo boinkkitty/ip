@@ -37,6 +37,16 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    /**
+     * Finds word in task description and returns true or false.
+     * @param word Word to find.
+     * @return True if task description contains word, false otherwise.
+     */
+
+    public boolean hasWord(String word) {
+        return this.name.contains(word);
+    };
+
     public abstract String saveTask();
 
     /**

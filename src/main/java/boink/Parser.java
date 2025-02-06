@@ -47,6 +47,8 @@ public class Parser {
             return new MarkCommand(Integer.parseInt(parts[1]) - 1);
         case "delete":
             return new DeleteCommand(Integer.parseInt(parts[1]) - 1);
+        case "find":
+            return new FindCommand(parts[1].trim());
         case "todo":
         case "deadline":
         case "event":
