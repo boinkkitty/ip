@@ -1,9 +1,9 @@
 package boink;
 
+import java.io.FileNotFoundException;
+
 import boink.commands.Command;
 import boink.exceptions.BoinkException;
-
-import java.io.FileNotFoundException;
 
 /**
  * This class represents an instance of Boink bot
@@ -40,7 +40,7 @@ public class Boink {
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String command = ui.readCommand();
                 ui.showLine();

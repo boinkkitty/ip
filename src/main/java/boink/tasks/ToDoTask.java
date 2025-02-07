@@ -11,7 +11,7 @@ public class ToDoTask extends Task {
      * @param name The name of task.
      */
 
-    public ToDoTask (String name) {
+    public ToDoTask(String name) {
         super(name);
     }
 

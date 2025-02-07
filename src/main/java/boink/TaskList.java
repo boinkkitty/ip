@@ -1,7 +1,5 @@
 package boink;
 
-import boink.tasks.Task;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -9,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import boink.tasks.Task;
 
 /**
  * This class represents a list containing user's tasks.
@@ -39,7 +39,7 @@ public class TaskList {
      * @return Print output for added task.
      */
 
-    public String addTask (Task task) {
+    public String addTask(Task task) {
         this.tasks.add(task);
         this.saveTasks();
         return "Got it. I've added this task:\n" + task + "\n"
@@ -80,7 +80,7 @@ public class TaskList {
      * @return Print output for deleted task.
      */
 
-    public String deleteTask (int index) {
+    public String deleteTask(int index) {
         Task removedTask = this.tasks.get(index);
         this.tasks.remove(index);
         this.saveTasks();
@@ -92,7 +92,7 @@ public class TaskList {
      * @param word Keyword to find in task.
      * @return Print output for filtered list of tasks containing keyword.
      */
-    public String findWord (String word) {
+    public String findWord(String word) {
         List<Task> filteredTasks = new ArrayList<>();
         for (Task task: tasks) {
             if (task.hasWord(word)) {

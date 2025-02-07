@@ -1,16 +1,24 @@
 package boink;
 
-import boink.commands.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import boink.commands.AddCommand;
+import boink.commands.Command;
+import boink.commands.DeleteCommand;
+import boink.commands.EndCommand;
+import boink.commands.FindCommand;
+import boink.commands.ListCommand;
+import boink.commands.MarkCommand;
+import boink.commands.UnknownCommand;
+import boink.commands.UnmarkCommand;
 import boink.exceptions.BoinkException;
 import boink.exceptions.TaskInputException;
 import boink.tasks.Deadline;
 import boink.tasks.Event;
 import boink.tasks.Task;
 import boink.tasks.ToDoTask;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * This class deals with making sense of the user command.
@@ -25,7 +33,7 @@ public class Parser {
      * @throws BoinkException If user enters empty input, invalid date format or task format
      */
 
-    public static Command parse (String command) throws BoinkException {
+    public static Command parse(String command) throws BoinkException {
         String[] parts = command.split(" ");
 
         switch (parts[0]) {

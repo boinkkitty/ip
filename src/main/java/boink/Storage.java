@@ -1,15 +1,15 @@
 package boink;
 
-import boink.tasks.Deadline;
-import boink.tasks.Event;
-import boink.tasks.Task;
-import boink.tasks.ToDoTask;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import boink.tasks.Deadline;
+import boink.tasks.Event;
+import boink.tasks.Task;
+import boink.tasks.ToDoTask;
 
 /**
  * This class deals with loading tasks from the file and saving tasks in the file.
@@ -24,7 +24,7 @@ public class Storage {
      * @param filePath
      */
 
-    public Storage (String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 

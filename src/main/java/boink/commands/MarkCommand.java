@@ -16,7 +16,7 @@ public class MarkCommand extends Command {
      * @param index Index of task to be marked as done.
      */
 
-    public MarkCommand (int index) {
+    public MarkCommand(int index) {
         this.index = index;
     }
 
