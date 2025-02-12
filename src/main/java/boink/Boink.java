@@ -17,48 +17,53 @@ public class Boink {
 
     /**
      * Public constructor for Boink bot.
-     * @param filePath Path to file for task loading.
      */
 
-    public Boink(String filePath) {
+    public Boink() {
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage("./data/data.txt");
         this.tasks = new TaskList();
 
         try {
             this.storage.loadTasksFromFile(this.tasks);
         } catch (FileNotFoundException err) {
             System.out.println(err.getMessage());
-            ui.showLoadingError();
         }
     }
 
     /**
-     * Runs application and starts user interaction
+     * Returns welcome message to display
+     *
+     * @return String containing welcome message
      */
 
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String command = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(command);
-                c.execute(this.storage, this.ui, this.tasks);
-                isExit = c.isExit();
-            } catch (BoinkException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-        ui.showExit();
-        ui.showLine();
+    public String sayWelcome() {
+        return this.ui.showWelcome();
+    }
+    /**
+     * Processes the user input, executes the corresponding command,
+     * and returns Boink's response to print.
+     *
+     * @param userInput The command input from the user.
+     * @return A string representing the system's response after executing the command.
+     * @throws BoinkException If an error occurs during command execution.
+     */
+
+    public String getResponse(String userInput) throws BoinkException {
+        Command c = Parser.parse(userInput);
+        String output = c.execute(this.storage, this.ui, this.tasks);
+        return output;
     }
 
-    public static void main(String[] args) {
-        new Boink("./data/data.txt").run();
+    /**
+     * Returns an error response message to be displayed to the user.
+     *
+     * @param err The error message to be shown.
+     * @return A string containing the formatted error response.
+     */
+
+    public String getErrorResponse(String err) {
+        return this.ui.showError(err);
     }
 }
 

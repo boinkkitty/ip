@@ -19,10 +19,17 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * Delete task in task list, update task list to Storage and return UI response
+     * @param storage Storage
+     * @param ui UI
+     * @param tasks TaskList
+     * @return String containing UI Response
+     */
     @Override
-    public void execute(Storage storage, Ui ui, TaskList tasks) {
+    public String execute(Storage storage, Ui ui, TaskList tasks) {
         String output = tasks.deleteTask(this.index);
         storage.saveTasksToFile(tasks);
-        ui.showCommand(output);
+        return ui.showCommand(output);
     }
 }

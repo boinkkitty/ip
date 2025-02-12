@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 public class Ui {
 
-    private static final String DIVIDER = "===================================================";
     private final Scanner sc;
 
     public Ui() {
@@ -19,28 +18,24 @@ public class Ui {
         return sc.nextLine();
     }
 
-    public void showCommand(String command) {
-        System.out.println(command);
+    public String showCommand(String output) {
+        return output;
     }
 
-    public void showWelcome() {
-        System.out.println("Hello! I'm Boink\n" + "What can I do for you?");
+    public String showWelcome() {
+        return "Hello! I'm Boink!\n" + "What can I do for you?\n";
     }
 
-    public void showError(String err) {
-        System.out.println("Exception encountered! " + err);
+    public String showError(String err) {
+        return "Exception encountered! " + err + "\n";
     }
 
-    public void showLoadingError() {
-        System.out.println("Error occurred. Failed to load tasks");
+    public String showLoadingError() {
+        return "Error occurred. Failed to load tasks";
     }
 
-    public void showExit() {
-        System.out.println("Exiting from Boink...");
-    }
-
-    public void showLine() {
-        System.out.println(DIVIDER);
+    public String showExit() {
+        return "Exiting from Boink...\n";
     }
 
 }

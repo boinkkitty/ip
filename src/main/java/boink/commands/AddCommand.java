@@ -20,10 +20,18 @@ public class AddCommand extends Command {
         this.task = task;
     }
 
+    /**
+     * Adds task to task list, updates task list to Storage and return UI response
+     * @param storage Storage
+     * @param ui UI
+     * @param tasks TaskList
+     * @return String containing UI Response
+     */
+
     @Override
-    public void execute(Storage storage, Ui ui, TaskList tasks) {
+    public String execute(Storage storage, Ui ui, TaskList tasks) {
         String output = tasks.addTask(this.task);
         storage.saveTasksToFile(tasks);
-        ui.showCommand(output);
+        return ui.showCommand(output);
     }
 }

@@ -10,9 +10,17 @@ import boink.Ui;
 
 public class ListCommand extends Command {
 
+    /**
+     * Return UI response containing list of tasks
+     * @param storage Storage
+     * @param ui UI
+     * @param tasks TaskList
+     * @return String containing UI Response
+     */
+
     @Override
-    public void execute(Storage storage, Ui ui, TaskList tasks) {
+    public String execute(Storage storage, Ui ui, TaskList tasks) {
         String output = tasks.printTasks();
-        ui.showCommand(output);
+        return ui.showCommand(output);
     }
 }

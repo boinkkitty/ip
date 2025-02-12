@@ -16,9 +16,17 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
+    /**
+     * Finds tasks in tasklist containing keyword and return UI response
+     * @param storage Storage
+     * @param ui UI
+     * @param tasks TaskList
+     * @return String containing UI Response
+     */
+
     @Override
-    public void execute(Storage storage, Ui ui, TaskList tasks) {
+    public String execute(Storage storage, Ui ui, TaskList tasks) {
         String output = tasks.findWord(this.keyword);
-        ui.showCommand(output);
+        return ui.showCommand(output);
     }
 }
