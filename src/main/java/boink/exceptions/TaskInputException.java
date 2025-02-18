@@ -16,8 +16,4 @@ public class TaskInputException extends BoinkException {
         super("The input format for adding tasks is invalid. " + msg);
     }
 
-    @Override
-    public String getMessage() {
-        return super.getMessage();
-    }
 }

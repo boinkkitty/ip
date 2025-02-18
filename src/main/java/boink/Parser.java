@@ -4,16 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import boink.commands.AddCommand;
-import boink.commands.Command;
-import boink.commands.DeleteCommand;
-import boink.commands.EndCommand;
-import boink.commands.FindCommand;
-import boink.commands.ListCommand;
-import boink.commands.MarkCommand;
-import boink.commands.UnknownCommand;
-import boink.commands.UnmarkCommand;
 import boink.exceptions.BoinkException;
+import boink.exceptions.InvalidCommandException;
 import boink.exceptions.TaskInputException;
 import boink.tasks.Deadline;
 import boink.tasks.Event;
@@ -33,33 +25,31 @@ public class Parser {
      * @throws BoinkException If user enters empty input, invalid date format or task format
      */
 
-    public static Command parse(String command) throws BoinkException {
+    public static Command parseUserInput(String command) throws BoinkException {
         String[] parts = command.split(" ");
 
         switch (parts[0]) {
         case "":
             throw new BoinkException("Empty input. Please enter a valid command!");
         case "bye":
-            if (parts.length == 1) {
-                return new EndCommand();
-            }
-            // Fallthrough
+            return Command.BYE;
         case "list":
-            if (parts.length == 1) {
-                return new ListCommand();
-            }
-            // Fallthrough
+            return Command.LIST;
         case "unmark":
-            return new UnmarkCommand(Integer.parseInt(parts[1]) - 1);
+            return Command.UNMARK;
         case "mark":
-            return new MarkCommand(Integer.parseInt(parts[1]) - 1);
+            return Command.MARK;
         case "delete":
-            return new DeleteCommand(Integer.parseInt(parts[1]) - 1);
+            return Command.DELETE;
         case "find":
-            return new FindCommand(parts[1].trim());
+            return Command.FIND;
         case "todo":
+            return Command.TODO;
         case "deadline":
+            return Command.DEADLINE;
         case "event":
+            return Command.EVENT;
+            /*
             try {
                 Task task = Parser.parseTaskFromInput(command);
                 return new AddCommand(task);
@@ -68,8 +58,9 @@ public class Parser {
             } catch (BoinkException err) {
                 throw new TaskInputException("Error: Task Details");
             }
+            */
         default:
-            return new UnknownCommand();
+            throw new InvalidCommandException("Unknown command. Please enter a valid command");
         }
     }
 
@@ -81,7 +72,7 @@ public class Parser {
      * @throws DateTimeParseException If date input format is invalid.
      */
 
-    private static Task parseTaskFromInput(String input) throws BoinkException, DateTimeParseException {
+    public static Task createTaskFromInput(String input) throws BoinkException, DateTimeParseException {
         String[] check = input.split(" ");
         if (check.length <= 1) {
             throw new BoinkException("Can't be empty!");

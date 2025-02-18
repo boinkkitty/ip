@@ -14,9 +14,4 @@ public class BoinkException extends Exception {
     public BoinkException(String msg) {
         super(msg);
     }
-
-    @Override
-    public String getMessage() {
-        return super.getMessage();
-    }
 }

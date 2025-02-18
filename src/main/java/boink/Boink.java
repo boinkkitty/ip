@@ -2,7 +2,6 @@ package boink;
 
 import java.io.FileNotFoundException;
 
-import boink.commands.Command;
 import boink.exceptions.BoinkException;
 
 /**
@@ -50,9 +49,30 @@ public class Boink {
      */
 
     public String getResponse(String userInput) throws BoinkException {
-        Command c = Parser.parse(userInput);
-        String output = c.execute(this.storage, this.ui, this.tasks);
-        return output;
+        Command userCommand = Parser.parseUserInput(userInput);
+        String response = "";
+
+        switch (userCommand) {
+            case BYE:
+                return ui.showExit();
+            case LIST:
+                return ui.listTasks();
+            case MARK:
+                return ui.markTask(userInput);
+            case UNMARK:
+                return ui.unmarkTask(userInput);
+            case DELETE:
+                return ui.deleteTask(userInput);
+            case FIND:
+                return ui.findTasks(userInput);
+            case TODO:
+            case DEADLINE:
+            case EVENT:
+                return ui.createTask(userInput);
+            default:
+                return response;
+        }
+
     }
 
     /**
@@ -65,5 +85,9 @@ public class Boink {
     public String getErrorResponse(String err) {
         return this.ui.showError(err);
     }
+
+     public String addTask(String userInput) {
+
+     }
 }
 
