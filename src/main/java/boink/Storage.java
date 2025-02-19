@@ -19,14 +19,16 @@ import boink.utils.Utils;
 public class Storage {
 
     private String filePath;
+    private String archiveFilePath;
 
     /**
      * Constructor for storage.
      * @param filePath
      */
 
-    public Storage(String filePath) {
+    public Storage(String filePath, String archiveFilePath) {
         this.filePath = filePath;
+        this.archiveFilePath = archiveFilePath;
     }
 
 
@@ -58,11 +60,27 @@ public class Storage {
     public void saveTasksToFile(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(filePath, false);
-            StringBuilder sb = new StringBuilder();
             fw.write(taskList.saveTasks());
             fw.close();
         } catch (IOException e) {
             System.out.println("Error occurred while saving tasks to file " + e.getMessage());
+        }
+    }
+
+    /**
+     * Writes tasks from taskList into archive file
+     * IOException thrown and caught if error occurred.
+     * @param taskList Tasklist to read tasks for archiving.
+     */
+
+    public void archiveTasksToFile(TaskList taskList) {
+        try {
+            FileWriter fw = new FileWriter(archiveFilePath, true);
+            fw.write(taskList.saveTasks());
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Error occurred while archiving tasks to archive file "
+                    + e.getMessage());
         }
     }
 

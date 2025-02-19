@@ -151,4 +151,14 @@ public class Ui {
         storage.saveTasksToFile(tasks);
         return output;
     }
+
+    /**
+     * Archives all tasks into archive file
+     */
+    public String archiveTasks() {
+        storage.archiveTasksToFile(tasks);
+        String output = tasks.archiveAllTasks();
+        storage.saveTasksToFile(tasks);
+        return output;
+    }
 }

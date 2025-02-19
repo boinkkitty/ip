@@ -113,10 +113,14 @@ public class TaskList {
      */
 
     public String printTasks() {
-        List<String> output = IntStream.range(0, this.tasks.size()).mapToObj(
-                i -> ((i + 1) + "." + this.tasks.get(i) + "\n"))
-                .collect(Collectors.toList());
-        return String.join("", output);
+        if (tasks.isEmpty()) {
+            return "There are no tasks in the list currently.";
+        } else {
+            List<String> output = IntStream.range(0, this.tasks.size()).mapToObj(
+                            i -> ((i + 1) + "." + this.tasks.get(i) + "\n"))
+                    .collect(Collectors.toList());
+            return String.join("", output);
+        }
     }
 
     /**
@@ -131,6 +135,28 @@ public class TaskList {
         }
         return sb.toString();
     }
+
+    /**
+     * Returns a message indicating the result of archiving tasks
+     * and updating the task list to a new, empty state.
+     * @return String message indicating the status of task archiving.
+     */
+
+    public String archiveAllTasks() {
+        if (tasks.isEmpty()) {
+            return "There are no tasks to archive. Please add a task!";
+        } else {
+            String output = String.format("Archived %d tasks!", this.tasks.size());
+            this.tasks = new ArrayList<>();
+            return output;
+        }
+    }
+
+    /**
+     * Receives index and checks if index points to existing task.
+     * @param index Index.
+     * @throws InvalidIndexException If index is out of tasklist range.
+     */
 
     private void validateIndex(int index) throws InvalidIndexException {
         assert (index >= 0 && index < tasks.size()) : "Index must point to an existing task";
