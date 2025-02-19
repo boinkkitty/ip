@@ -119,7 +119,7 @@ public class TaskList {
             List<String> output = IntStream.range(0, this.tasks.size()).mapToObj(
                             i -> ((i + 1) + "." + this.tasks.get(i) + "\n"))
                     .collect(Collectors.toList());
-            return String.join("", output);
+            return "Here are the tasks in your list: \n" + String.join("", output);
         }
     }
 

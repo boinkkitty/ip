@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 import boink.tasks.Deadline;
@@ -23,14 +26,20 @@ public class Storage {
 
     /**
      * Constructor for storage.
-     * @param filePath
+     * @param path
      */
 
-    public Storage(String filePath, String archiveFilePath) {
-        this.filePath = filePath;
-        this.archiveFilePath = archiveFilePath;
+    public Storage(String path) {
+        String workingDirectory = System.getProperty("user.dir");
+        try {
+            Path directoryPath = Paths.get(workingDirectory + File.separator + path);
+            Files.createDirectories(directoryPath);
+            this.filePath = workingDirectory + File.separator + path + "/data.txt";
+            this.archiveFilePath = workingDirectory + File.separator + path + "/archivedData.txt";
+        } catch (IOException err) {
+            System.out.println("Error occurred initializing Storage. " + err.getMessage());
+        }
     }
-
 
     /**
      * Loads tasks from file into taskList.
