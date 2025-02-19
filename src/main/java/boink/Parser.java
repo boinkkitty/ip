@@ -50,6 +50,8 @@ public class Parser {
             return Command.DEADLINE;
         case "event":
             return Command.EVENT;
+        case "archive":
+            return Command.ARCHIVE;
         default:
             throw new InvalidCommandException("Unknown command. Please enter a valid command");
         }

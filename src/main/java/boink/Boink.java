@@ -19,7 +19,7 @@ public class Boink {
      */
 
     public Boink() {
-        this.storage = new Storage("./data/data.txt");
+        this.storage = new Storage("./data/data.txt", "./data/archiveData.txt");
         this.tasks = new TaskList();
         this.ui = new Ui(this.storage, this.tasks);
     }
@@ -79,6 +79,8 @@ public class Boink {
         case DEADLINE:
         case EVENT:
             return ui.addTask(userInput);
+        case ARCHIVE:
+            return ui.archiveTasks();
         default:
             return response;
         }
