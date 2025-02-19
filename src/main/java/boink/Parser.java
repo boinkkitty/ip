@@ -64,6 +64,7 @@ public class Parser {
 
     public static Task createTaskFromInput(String input) throws BoinkException {
         try {
+            assert !input.isEmpty() : "User input should not be empty";
             String[] check = input.split(" ");
             if (check.length <= 1) {
                 throw new InvalidTaskInputException("Task must have name!");
@@ -86,6 +87,7 @@ public class Parser {
                     String[] secondParts = parts[1].split("/to ");
                     LocalDateTime start = Utils.createDateTime(secondParts[0].trim());
                     LocalDateTime end = Utils.createDateTime(secondParts[1].trim());
+                    assert (start.compareTo(end) <= 0) : "End cannot be earlier than start";
                     return new Event(name, start, end);
                 default:
                     return null;
