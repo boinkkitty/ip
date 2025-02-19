@@ -2,6 +2,7 @@ package boink.gui;
 
 import boink.Boink;
 import boink.exceptions.BoinkException;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for the main GUI.
@@ -29,7 +31,7 @@ public class MainWindow extends AnchorPane {
     private Boink boink;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image boinkImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image boinkImage = new Image(this.getClass().getResourceAsStream("/images/DaBoink.png"));
 
     @FXML
     public void initialize() {
@@ -47,13 +49,13 @@ public class MainWindow extends AnchorPane {
         );
     }
 
-    /** Injects the Duke instance */
+    /** Injects the Boink instance */
     public void setBoink(Boink b) {
         this.boink = b;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Boink's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
 
@@ -73,6 +75,7 @@ public class MainWindow extends AnchorPane {
             }
         } catch (BoinkException e) {
             String response = boink.getErrorResponse(e.getMessage());
+
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getBoinkDialog(response, boinkImage)
@@ -80,13 +83,14 @@ public class MainWindow extends AnchorPane {
         }
 
         if (isExit) {
-            Platform.exit();
-        } else {
-            userInput.clear();
+            PauseTransition pause = new PauseTransition(Duration.seconds(1));
+            pause.setOnFinished(event -> {
+                Platform.exit();
+            });
+            pause.play();
         }
+        userInput.clear();
     }
-
-
 
     private boolean isExitResponse(String response) {
         return response.equals("Exiting from Boink...\n");

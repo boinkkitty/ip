@@ -1,7 +1,5 @@
 package boink.tasks;
 
-import boink.utils.Utils;
-
 /**
  * This class represents a task without deadline.
  */
