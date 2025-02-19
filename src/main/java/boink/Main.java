@@ -25,7 +25,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setBoink(boink); // inject the Duke instance
+            fxmlLoader.<MainWindow>getController().setBoink(boink); // inject the Boink instance
             fxmlLoader.<MainWindow>getController().loadWelcome(); // Load Welcome Message
             stage.show();
         } catch (IOException e) {

@@ -13,13 +13,14 @@ public class Boink {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private final String filePath = "data";
 
     /**
      * Public constructor for Boink bot.
      */
 
     public Boink() {
-        this.storage = new Storage("./data/data.txt", "./data/archiveData.txt");
+        this.storage = new Storage(this.filePath);
         this.tasks = new TaskList();
         this.ui = new Ui(this.storage, this.tasks);
     }
