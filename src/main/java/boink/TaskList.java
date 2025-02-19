@@ -96,15 +96,14 @@ public class TaskList {
      */
 
     public String findWord(String word) {
-        List<Task> filteredTasks = new ArrayList<>();
-        for (Task task: tasks) {
-            if (task.hasWord(word)) {
-                filteredTasks.add(task);
-            }
-        }
-        List<String> output = IntStream.range(0, filteredTasks.size()).mapToObj(
-                        i -> ((i + 1) + "." + filteredTasks.get(i) + "\n"))
+        List<Task> filteredTasks = tasks.stream()
+                .filter(task -> task.hasWord(word))
                 .collect(Collectors.toList());
+
+        List<String> output = IntStream.range(0, filteredTasks.size())
+                .mapToObj(i -> ((i + 1) + "." + filteredTasks.get(i) + "\n"))
+                .collect(Collectors.toList());
+
         return "Here are the matching tasks in your list: \n" + String.join("", output);
     }
 
