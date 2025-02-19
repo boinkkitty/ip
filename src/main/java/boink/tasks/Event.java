@@ -1,5 +1,7 @@
 package boink.tasks;
 
+import boink.utils.Utils;
+
 import java.time.LocalDateTime;
 
 /**
@@ -31,13 +33,13 @@ public class Event extends Task {
     @Override
     public String saveTask() {
         String output = "E | " + (this.isDone() ? 1 : 0) + " | " + this.getName()
-                + " | " + super.saveDateTime(this.start) + " | " + super.saveDateTime(this.end);
+                + " | " + Utils.saveDateTime(this.start) + " | " + Utils.saveDateTime(this.end);
         return output;
     }
 
     @Override
     public String toString() {
         return "[E] " + super.toString() + " from: "
-                + super.getDateTime(this.start) + " to: " + super.getDateTime(this.end) + ")";
+                + Utils.getDateTime(this.start) + " to: " + Utils.getDateTime(this.end) + ")";
     }
 }

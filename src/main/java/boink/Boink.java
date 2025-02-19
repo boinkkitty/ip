@@ -19,9 +19,9 @@ public class Boink {
      */
 
     public Boink() {
-        this.ui = new Ui();
         this.storage = new Storage("./data/data.txt");
         this.tasks = new TaskList();
+        this.ui = new Ui(this.storage, this.tasks);
 
         try {
             this.storage.loadTasksFromFile(this.tasks);
@@ -85,9 +85,5 @@ public class Boink {
     public String getErrorResponse(String err) {
         return this.ui.showError(err);
     }
-
-     public String addTask(String userInput) {
-
-     }
 }
 

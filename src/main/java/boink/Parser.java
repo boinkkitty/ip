@@ -1,16 +1,16 @@
 package boink;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import boink.exceptions.BoinkException;
 import boink.exceptions.InvalidCommandException;
-import boink.exceptions.TaskInputException;
+import boink.exceptions.InvalidTaskInputException;
 import boink.tasks.Deadline;
 import boink.tasks.Event;
 import boink.tasks.Task;
 import boink.tasks.ToDoTask;
+import boink.utils.Utils;
 
 /**
  * This class deals with making sense of the user command.
@@ -49,16 +49,6 @@ public class Parser {
             return Command.DEADLINE;
         case "event":
             return Command.EVENT;
-            /*
-            try {
-                Task task = Parser.parseTaskFromInput(command);
-                return new AddCommand(task);
-            } catch (DateTimeParseException err) {
-                throw new TaskInputException("Error: Date Format");
-            } catch (BoinkException err) {
-                throw new TaskInputException("Error: Task Details");
-            }
-            */
         default:
             throw new InvalidCommandException("Unknown command. Please enter a valid command");
         }
@@ -72,45 +62,36 @@ public class Parser {
      * @throws DateTimeParseException If date input format is invalid.
      */
 
-    public static Task createTaskFromInput(String input) throws BoinkException, DateTimeParseException {
-        String[] check = input.split(" ");
-        if (check.length <= 1) {
-            throw new BoinkException("Can't be empty!");
-        }
+    public static Task createTaskFromInput(String input) throws BoinkException {
+        try {
+            String[] check = input.split(" ");
+            if (check.length <= 1) {
+                throw new InvalidTaskInputException("Task must have name!");
+            }
 
-        switch (check[0]) {
-        case "todo":
-            String name = input.substring(5);
-            return new ToDoTask(name);
-        case "deadline":
-            input = input.substring(9);
-            String[] parts = input.split("/by ");
-            name = parts[0].trim();
-            LocalDateTime deadline = createDateTime(parts[1].trim());
-            return new Deadline(name, deadline);
-        case "event":
-            input = input.substring(6);
-            parts = input.split("/from ");
-            name = parts[0].trim();
-            String[] secondParts = parts[1].split("/to ");
-            LocalDateTime start = createDateTime(secondParts[0].trim());
-            LocalDateTime end = createDateTime(secondParts[1].trim());
-            return new Event(name, start, end);
-        default:
-            return null;
+            switch (check[0]) {
+                case "todo":
+                    String name = input.substring(5);
+                    return new ToDoTask(name);
+                case "deadline":
+                    input = input.substring(9);
+                    String[] parts = input.split("/by ");
+                    name = parts[0].trim();
+                    LocalDateTime deadline = Utils.createDateTime(parts[1].trim());
+                    return new Deadline(name, deadline);
+                case "event":
+                    input = input.substring(6);
+                    parts = input.split("/from ");
+                    name = parts[0].trim();
+                    String[] secondParts = parts[1].split("/to ");
+                    LocalDateTime start = Utils.createDateTime(secondParts[0].trim());
+                    LocalDateTime end = Utils.createDateTime(secondParts[1].trim());
+                    return new Event(name, start, end);
+                default:
+                    return null;
+            }
+        } catch (DateTimeParseException err) {
+            throw new InvalidTaskInputException("Invalid date format");
         }
     }
-
-    /**
-     * Creates LocalDatetime object from String input (dd/MM/yyyy HHmm).
-     * @param input String datetime (dd/MM/yyyy HHmm)
-     * @return LocalDateTime object.
-     * @throws DateTimeParseException thrown if input format is incorrect.
-     */
-
-    public static LocalDateTime createDateTime(String input) throws DateTimeParseException {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-        return LocalDateTime.parse(input, format);
-    }
-
 }

@@ -1,15 +1,12 @@
 package boink;
 
-import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import boink.exceptions.BoinkException;
-import boink.exceptions.InvalidCommandException;
-import boink.exceptions.TaskInputException;
-import boink.tasks.Deadline;
-import boink.tasks.Event;
+import boink.exceptions.InvalidIndexException;
+import boink.exceptions.InvalidTaskInputException;
 import boink.tasks.Task;
-import boink.tasks.ToDoTask;
+import boink.utils.Utils;
 
 /**
  * This class deals with interactions with the user.
@@ -27,24 +24,12 @@ public class Ui {
         this.tasks = tasks;
     }
 
-    public String readCommand() {
-        return sc.nextLine();
-    }
-
-    public String showCommand(String output) {
-        return output;
-    }
-
     public String showWelcome() {
         return "Hello! I'm Boink!\n" + "What can I do for you?\n";
     }
 
     public String showError(String err) {
         return "Exception encountered! " + err + "\n";
-    }
-
-    public String showLoadingError() {
-        return "Error occurred. Failed to load tasks";
     }
 
     public String showExit() {
@@ -56,25 +41,34 @@ public class Ui {
         return output;
     }
 
-    public String markTask(String input) {
+    public String markTask(String input) throws InvalidTaskInputException, InvalidIndexException {
         String[] parts = input.split(" ");
-        int index = Integer.parseInt(parts[1]);
+        if (!Utils.isInteger(parts[1])) {
+            throw new InvalidTaskInputException("Index must be a number!");
+        }
+        int index = Integer.parseInt(parts[1]) - 1;
         String output = tasks.markTask(index);
         storage.saveTasksToFile(tasks);
         return output;
     }
 
-    public String unmarkTask(String input) {
+    public String unmarkTask(String input) throws InvalidTaskInputException, InvalidIndexException {
         String[] parts = input.split(" ");
-        int index = Integer.parseInt(parts[1]);
+        if (!Utils.isInteger(parts[1])) {
+            throw new InvalidTaskInputException("Index must be a number!");
+        }
+        int index = Integer.parseInt(parts[1]) - 1;
         String output = tasks.unmarkTask(index);
         storage.saveTasksToFile(tasks);
         return output;
     }
 
-    public String deleteTask(String input) {
+    public String deleteTask(String input) throws InvalidTaskInputException, InvalidIndexException {
         String[] parts = input.split(" ");
-        int index = Integer.parseInt(parts[1]);
+        if (!Utils.isInteger(parts[1])) {
+            throw new InvalidTaskInputException("Index must be a number!");
+        }
+        int index = Integer.parseInt(parts[1]) - 1;
         String output = tasks.deleteTask(index);
         storage.saveTasksToFile(tasks);
         return output;
@@ -87,7 +81,7 @@ public class Ui {
         return output;
     }
 
-    public String createTask(String input) throws BoinkException, DateTimeParseException {
+    public String createTask(String input) throws BoinkException {
         Task newTask = Parser.createTaskFromInput(input);
         String output = tasks.addTask(newTask);
         storage.saveTasksToFile(tasks);

@@ -53,6 +53,7 @@ public class MainWindow extends AnchorPane {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
+
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
@@ -64,7 +65,7 @@ public class MainWindow extends AnchorPane {
                     DialogBox.getBoinkDialog(response, boinkImage)
             );
 
-            if (response.equals("Exiting from Boink...\n")) {
+            if (isExitResponse(response)) {
                 isExit = true;
             }
         } catch (BoinkException e) {
@@ -80,5 +81,11 @@ public class MainWindow extends AnchorPane {
         } else {
             userInput.clear();
         }
+    }
+
+
+
+    private boolean isExitResponse(String response) {
+        return response.equals("Exiting from Boink...\n");
     }
 }

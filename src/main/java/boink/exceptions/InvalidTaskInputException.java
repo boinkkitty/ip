@@ -5,15 +5,15 @@ package boink.exceptions;
  * This represents exceptions thrown from invalid task input format.
  */
 
-public class TaskInputException extends BoinkException {
+public class InvalidTaskInputException extends BoinkException {
 
     /**
-     * Constructor for TaskInputException.
+     * Constructor for InvalidTaskInputException.
      * @param msg Message for Exception.
      */
 
-    public TaskInputException(String msg) {
-        super("The input format for adding tasks is invalid. " + msg);
+    public InvalidTaskInputException(String msg) {
+        super("Invalid Task Input. Error: " + msg);
     }
 
 }

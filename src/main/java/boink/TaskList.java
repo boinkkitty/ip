@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import boink.exceptions.InvalidIndexException;
+import boink.exceptions.InvalidTaskInputException;
 import boink.tasks.Task;
 
 /**
@@ -56,7 +58,8 @@ public class TaskList {
      * @return Print output for marked task.
      */
 
-    public String markTask(int index) {
+    public String markTask(int index) throws InvalidIndexException {
+        validateIndex(index);
         tasks.get(index).setDone();
         this.saveTasks();
         return "Nice! I've marked this task as done: \n" + tasks.get(index);
@@ -68,7 +71,8 @@ public class TaskList {
      * @return Print output for unmarked task.
      */
 
-    public String unmarkTask(int index) {
+    public String unmarkTask(int index) throws InvalidIndexException {
+        validateIndex(index);
         this.tasks.get(index).setNotDone();
         this.saveTasks();
         return "OK, I've marked this task as not done yet: \n" + tasks.get(index);
@@ -80,7 +84,8 @@ public class TaskList {
      * @return Print output for deleted task.
      */
 
-    public String deleteTask(int index) {
+    public String deleteTask(int index) throws InvalidIndexException {
+        validateIndex(index);
         Task removedTask = this.tasks.get(index);
         this.tasks.remove(index);
         this.saveTasks();
@@ -92,6 +97,7 @@ public class TaskList {
      * @param word Keyword to find in task.
      * @return Print output for filtered list of tasks containing keyword.
      */
+
     public String findWord(String word) {
         List<Task> filteredTasks = new ArrayList<>();
         for (Task task: tasks) {
@@ -130,16 +136,9 @@ public class TaskList {
         return sb.toString();
     }
 
-    /**
-     * Creates LocalDatetime object from String input (dd/MM/yyyy HHmm).
-     * Throws DateTimeParseException if input format is incorrect.
-     * @param input String datetime (dd/MM/yyyy HHmm).
-     * @return LocalDateTime object.
-     * @throws DateTimeParseException If datetime input format is wrong.
-     */
-
-    public static LocalDateTime createDateTime(String input) throws DateTimeParseException {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-        return LocalDateTime.parse(input, format);
+    private void validateIndex(int index) throws InvalidIndexException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new InvalidIndexException("Index does not match to a task!");
+        }
     }
 }

@@ -10,6 +10,7 @@ import boink.tasks.Deadline;
 import boink.tasks.Event;
 import boink.tasks.Task;
 import boink.tasks.ToDoTask;
+import boink.utils.Utils;
 
 /**
  * This class deals with loading tasks from the file and saving tasks in the file.
@@ -81,14 +82,14 @@ public class Storage {
             }
             return task;
         case "D":
-            task = new Deadline(parts[2].trim(), Parser.createDateTime(parts[3].trim()));
+            task = new Deadline(parts[2].trim(), Utils.createDateTime(parts[3].trim()));
             if (isDone) {
                 task.setDone();
             }
             return task;
         case "E":
-            task = new Event(parts[2].trim(), Parser.createDateTime(parts[3].trim()),
-                    Parser.createDateTime(parts[4].trim()));
+            task = new Event(parts[2].trim(), Utils.createDateTime(parts[3].trim()),
+                    Utils.createDateTime(parts[4].trim()));
             if (isDone) {
                 task.setDone();
             }
