@@ -25,9 +25,9 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /**
-     * Constructor for DialogBox class
-     * @param text Text to display
-     * @param img Image to display
+     * Constructor for DialogBox class.
+     * @param text Text to display.
+     * @param img Image to display.
      */
 
     private DialogBox(String text, Image img) {
@@ -59,7 +59,7 @@ public class DialogBox extends HBox {
      * Creates a dialog box representing the user's message.
      *
      * @param text The text content of the user's message.
-     * @param img The image representing the user
+     * @param img The image representing the user.
      * @return A {@code DialogBox} containing the given text and image.
      */
 
@@ -71,7 +71,7 @@ public class DialogBox extends HBox {
      * Creates a dialog box representing Boink's message.
      *
      * @param text The text content of Boink's message.
-     * @param img The image representing Boink
+     * @param img The image representing Boink.
      * @return A flipped {@code DialogBox} containing the given text and image.
      */
 

@@ -1,20 +1,20 @@
 package boink.tasks;
 
-import boink.utils.Utils;
-
 import java.time.LocalDateTime;
 
+import boink.utils.Utils;
+
 /**
- * This class represents a task with a datetime deadline
+ * This class represents a task with a datetime deadline.
  */
 
 public class Deadline extends Task {
     private LocalDateTime deadline;
 
     /**
-     * Constructor for Deadline class
-     * @param name The name of task
-     * @param deadline The deadline of task
+     * Constructor for Deadline class.
+     * @param name The name of task.
+     * @param deadline The deadline of task.
      */
 
     public Deadline(String name, LocalDateTime deadline) {
@@ -29,13 +29,20 @@ public class Deadline extends Task {
 
     @Override
     public String saveTask() {
-        String output = "D | " + (this.isDone() ? 1 : 0) + " | " + this.getName()
-                + " | " + Utils.saveDateTime(this.deadline);
-        return output;
+        return String.format(
+                "D | %d | %s | %s",
+                super.getDoneIntValue(),
+                this.getName(),
+                Utils.saveDateTime(this.deadline)
+        );
     }
 
     @Override
     public String toString() {
-        return "[D] " + super.toString() + " (by: " + Utils.getDateTime(this.deadline) + ")";
+        return String.format(
+                "[D] %s by %s",
+                super.toString(),
+                Utils.getDateTime(this.deadline)
+        );
     }
 }

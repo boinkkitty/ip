@@ -1,8 +1,8 @@
 package boink.tasks;
 
-import boink.utils.Utils;
-
 import java.time.LocalDateTime;
+
+import boink.utils.Utils;
 
 /**
  * This class represents a task with a start and end datetime.
@@ -14,9 +14,9 @@ public class Event extends Task {
 
     /**
      * Constructor for Event class.
-     * @param name The name of task
-     * @param start The start datetime of task
-     * @param end The end datetime of task
+     * @param name The name of task.
+     * @param start The start datetime of task.
+     * @param end The end datetime of task.
      */
 
     public Event(String name, LocalDateTime start, LocalDateTime end) {
@@ -32,14 +32,22 @@ public class Event extends Task {
 
     @Override
     public String saveTask() {
-        String output = "E | " + (this.isDone() ? 1 : 0) + " | " + this.getName()
-                + " | " + Utils.saveDateTime(this.start) + " | " + Utils.saveDateTime(this.end);
-        return output;
+        return String.format(
+                "E | %d | %s | %s | %s",
+                super.getDoneIntValue(),
+                this.getName(),
+                Utils.saveDateTime(this.start),
+                Utils.saveDateTime(this.end)
+        );
     }
 
     @Override
     public String toString() {
-        return "[E] " + super.toString() + " from: "
-                + Utils.getDateTime(this.start) + " to: " + Utils.getDateTime(this.end) + ")";
+        return String.format(
+                "[E] %s from %s to %s",
+                super.toString(),
+                Utils.getDateTime(this.start),
+                Utils.getDateTime(this.end)
+        );
     }
 }

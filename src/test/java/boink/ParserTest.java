@@ -16,7 +16,7 @@ public class ParserTest {
             Parser.createTaskFromInput("deadline /by 01/01/01 1234");
         });
 
-        String output = "Invalid Task Input. Error: Invalid date format";
+        String output = "Invalid Task Input. Error: Invalid date format!";
         assertEquals(output, exception.getMessage());
     }
 
