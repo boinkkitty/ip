@@ -146,6 +146,7 @@ public class Ui {
 
     public String addTask(String input) throws BoinkException {
         Task newTask = Parser.createTaskFromInput(input);
+        assert (newTask != null) : "Task should not be null";
         String output = tasks.addTask(newTask);
         storage.saveTasksToFile(tasks);
         return output;

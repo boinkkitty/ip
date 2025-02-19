@@ -38,6 +38,7 @@ public class TaskList {
      */
 
     public String addTask(Task task) {
+        assert (task != null) : "Task should not be null";
         this.tasks.add(task);
         this.saveTasks();
         return "Got it. I've added this task:\n" + task + "\n"
@@ -133,6 +134,7 @@ public class TaskList {
     }
 
     private void validateIndex(int index) throws InvalidIndexException {
+        assert (index >= 0 && index < tasks.size()) : "Index must point to an existing task";
         if (index < 0 || index >= tasks.size()) {
             throw new InvalidIndexException("Index does not match to a task!");
         }

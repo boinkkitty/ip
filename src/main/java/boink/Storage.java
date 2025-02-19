@@ -39,6 +39,7 @@ public class Storage {
     public void loadTasksFromFile(TaskList tasklist) throws FileNotFoundException {
         File tasksFile = new File(this.filePath);
         Scanner scanner = new Scanner(tasksFile);
+        assert tasklist != null : "Tasklist should not be null";
 
         while (scanner.hasNext()) {
             String line = scanner.nextLine();

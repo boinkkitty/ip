@@ -64,6 +64,7 @@ public class Parser {
 
     public static Task createTaskFromInput(String input) throws BoinkException {
         try {
+            assert !input.isEmpty() : "User input should not be empty";
             String[] check = input.split(" ");
             if (check.length <= 1) {
                 throw new InvalidTaskInputException("Task must have a name!");
