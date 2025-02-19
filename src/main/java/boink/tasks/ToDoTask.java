@@ -1,5 +1,7 @@
 package boink.tasks;
 
+import boink.utils.Utils;
+
 /**
  * This class represents a task without deadline.
  */
@@ -22,12 +24,18 @@ public class ToDoTask extends Task {
 
     @Override
     public String saveTask() {
-        String output = "T | " + (this.isDone() ? 1 : 0) + " | " + this.getName();
-        return output;
+        return String.format(
+                "T | %d | %s",
+                super.getDoneIntValue(),
+                this.getName()
+        );
     }
 
     @Override
     public String toString() {
-        return "[T] " + super.toString();
+        return String.format(
+                "[T] %s",
+                super.toString()
+        );
     }
 }

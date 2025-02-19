@@ -1,8 +1,5 @@
 package boink.tasks;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 /**
  * This abstract class represents a task.
  */
@@ -37,6 +34,10 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public int getDoneIntValue() {
+        return this.isDone ? 1 : 0;
+    }
+
     /**
      * Finds word in task description and returns true or false.
      * @param word Word to find.
@@ -51,6 +52,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "[" + (this.isDone ? "X" : " ") + "] " + this.name;
+        String mark = this.isDone ? "X" : " ";
+        return "[" + mark + "] " + this.name;
     }
 }

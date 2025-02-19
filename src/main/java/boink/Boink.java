@@ -22,23 +22,32 @@ public class Boink {
         this.storage = new Storage("./data/data.txt");
         this.tasks = new TaskList();
         this.ui = new Ui(this.storage, this.tasks);
-
-        try {
-            this.storage.loadTasksFromFile(this.tasks);
-        } catch (FileNotFoundException err) {
-            System.out.println(err.getMessage());
-        }
     }
 
     /**
-     * Returns welcome message to display
+     * Returns welcome message to display.
      *
-     * @return String containing welcome message
+     * @return String containing welcome message.
      */
 
     public String sayWelcome() {
-        return this.ui.showWelcome();
+        return this.ui.showWelcome() + " " + this.loadTasks();
     }
+
+    /**
+     * Returns output to print on success of loading tasks.
+     * @return String message indicating success or failure of loading tasks.
+     */
+
+    public String loadTasks() {
+        try {
+            this.storage.loadTasksFromFile(this.tasks);
+            return String.format("You currently have %d tasks in your list!", this.tasks.getSize());
+        } catch (FileNotFoundException err) {
+            return "Error: Task file not found! Please ensure the file exists and try again.";
+        }
+    }
+
     /**
      * Processes the user input, executes the corresponding command,
      * and returns Boink's response to print.
@@ -54,26 +63,25 @@ public class Boink {
         String response = "";
 
         switch (userCommand) {
-            case BYE:
-                return ui.showExit();
-            case LIST:
-                return ui.listTasks();
-            case MARK:
-                return ui.markTask(userInput);
-            case UNMARK:
-                return ui.unmarkTask(userInput);
-            case DELETE:
-                return ui.deleteTask(userInput);
-            case FIND:
-                return ui.findTasks(userInput);
-            case TODO:
-            case DEADLINE:
-            case EVENT:
-                return ui.createTask(userInput);
-            default:
-                return response;
+        case BYE:
+            return ui.showExit();
+        case LIST:
+            return ui.listTasks();
+        case MARK:
+            return ui.markTask(userInput);
+        case UNMARK:
+            return ui.unmarkTask(userInput);
+        case DELETE:
+            return ui.deleteTask(userInput);
+        case FIND:
+            return ui.findTasks(userInput);
+        case TODO:
+        case DEADLINE:
+        case EVENT:
+            return ui.addTask(userInput);
+        default:
+            return response;
         }
-
     }
 
     /**

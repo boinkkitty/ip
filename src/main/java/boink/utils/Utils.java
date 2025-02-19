@@ -5,10 +5,16 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * This class represents a class of utility methods to be used
+ * This class represents a class of utility methods to be used.
  */
 
 public class Utils {
+
+    /**
+     * Checks if String provided can be parsed into integer.
+     * @param input String to be parsed.
+     * @return True if input string is an integer, False otherwise.
+     */
 
     public static boolean isInteger(String input) {
         try {
@@ -21,7 +27,7 @@ public class Utils {
 
     /**
      * Converts LocalDateTime to String output in (dd MMM yyyy HH:mm) format
-     * for printing out for tasks objects
+     * for printing out for tasks objects.
      * @param dt DateTime object.
      * @return DateTime (dd MMM yyyy HH:mm).
      */
@@ -33,7 +39,7 @@ public class Utils {
 
     /**
      * Converts LocalDateTime to String output in (dd MMM yyyy HH:mm) format
-     * for writing to file for task objects
+     * for writing to file for task objects.
      * @param dt DateTime object.
      * @return DateTime (dd/MM/yyyy HHmm).
      */
@@ -45,7 +51,7 @@ public class Utils {
 
     /**
      * Creates LocalDatetime object from String input (dd/MM/yyyy HHmm).
-     * @param input String datetime (dd/MM/yyyy HHmm)
+     * @param input String datetime (dd/MM/yyyy HHmm).
      * @return LocalDateTime object.
      * @throws DateTimeParseException thrown if input format is incorrect.
      */

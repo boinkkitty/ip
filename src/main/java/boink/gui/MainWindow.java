@@ -1,5 +1,7 @@
 package boink.gui;
 
+import boink.Boink;
+import boink.exceptions.BoinkException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,9 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import boink.Boink;
-import boink.exceptions.BoinkException;
 
 /**
  * Controller for the main GUI.
@@ -36,6 +35,10 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
+
+    /**
+     * Loads welcome message and displays number of tasks in tasklist.
+     */
 
     public void loadWelcome() {
         String welcome = this.boink.sayWelcome();

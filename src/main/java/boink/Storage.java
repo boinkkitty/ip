@@ -75,28 +75,26 @@ public class Storage {
     private Task parseTaskLog(String input) {
         String[] parts = input.split("\\|");
         boolean isDone = parts[1].trim().equals("1");
+        Task task = null;
         switch (parts[0].trim()) {
         case "T":
-            Task task = new ToDoTask(parts[2].trim());
-            if (isDone) {
-                task.setDone();
-            }
-            return task;
+            task = new ToDoTask(parts[2].trim());
+            break;
         case "D":
             task = new Deadline(parts[2].trim(), Utils.createDateTime(parts[3].trim()));
-            if (isDone) {
-                task.setDone();
-            }
-            return task;
+            break;
         case "E":
             task = new Event(parts[2].trim(), Utils.createDateTime(parts[3].trim()),
                     Utils.createDateTime(parts[4].trim()));
-            if (isDone) {
-                task.setDone();
-            }
-            return task;
+            break;
         default:
-            return null;
+            return task;
         }
+
+        if (isDone) {
+            task.setDone();
+        }
+
+        return task;
     }
 }

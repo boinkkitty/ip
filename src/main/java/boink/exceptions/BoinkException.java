@@ -8,10 +8,10 @@ public class BoinkException extends Exception {
 
     /**
      * Constructor for BoinkException.
-     * @param msg Message for Exception.
+     * @param message Message for Exception.
      */
 
-    public BoinkException(String msg) {
-        super(msg);
+    public BoinkException(String message) {
+        super(message);
     }
 }

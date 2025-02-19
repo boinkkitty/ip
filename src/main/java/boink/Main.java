@@ -2,17 +2,17 @@ package boink;
 
 import java.io.IOException;
 
+import boink.gui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import boink.gui.MainWindow;
-
 /**
  * A GUI for Boink using FXML.
  */
+
 public class Main extends Application {
 
     private Boink boink = new Boink();
@@ -25,8 +25,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setBoink(boink);  // inject the Duke instance
-            fxmlLoader.<MainWindow>getController().loadWelcome();  // Load Welcome Message
+            fxmlLoader.<MainWindow>getController().setBoink(boink); // inject the Duke instance
+            fxmlLoader.<MainWindow>getController().loadWelcome(); // Load Welcome Message
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
