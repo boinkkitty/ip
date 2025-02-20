@@ -11,21 +11,6 @@ import java.time.format.DateTimeParseException;
 public class Utils {
 
     /**
-     * Checks if String provided can be parsed into integer.
-     * @param input String to be parsed.
-     * @return True if input string is an integer, False otherwise.
-     */
-
-    public static boolean isInteger(String input) {
-        try {
-            int num = Integer.parseInt(input);
-            return true;
-        } catch (NumberFormatException err) {
-            return false;
-        }
-    }
-
-    /**
      * Converts LocalDateTime to String output in (dd MMM yyyy HH:mm) format
      * for printing out for tasks objects.
      * @param dt DateTime object.
