@@ -59,7 +59,7 @@ public class Boink {
      */
 
     public String getResponse(String userInput) throws BoinkException {
-        assert userInput != "" : "User input should not be empty";
+        assert !userInput.isEmpty() : "User input should not be empty";
         Command userCommand = Parser.parseUserInput(userInput);
         String response = "";
 

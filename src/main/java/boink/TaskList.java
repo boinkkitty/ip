@@ -38,11 +38,11 @@ public class TaskList {
      */
 
     public String addTask(Task task) {
-        assert (task != null) : "Task should not be null";
+        assert (task != null) : "Task should not be null!";
         this.tasks.add(task);
         this.saveTasks();
         return "Got it. I've added this task:\n" + task + "\n"
-                + "Now you have " + this.tasks.size() + " tasks in the list \n";
+                + "Now you have " + this.tasks.size() + " tasks in the list! \n";
     }
 
     public int getSize() {
@@ -86,7 +86,7 @@ public class TaskList {
         Task removedTask = this.tasks.get(index);
         this.tasks.remove(index);
         this.saveTasks();
-        return "OK, I've removed this task from the list \n" + removedTask;
+        return "OK, I've removed this task from the list: \n" + removedTask;
     }
 
     /**
@@ -114,7 +114,7 @@ public class TaskList {
 
     public String printTasks() {
         if (tasks.isEmpty()) {
-            return "There are no tasks in the list currently.";
+            return "There are no tasks in the list currently. Please add a task!";
         } else {
             List<String> output = IntStream.range(0, this.tasks.size()).mapToObj(
                             i -> ((i + 1) + "." + this.tasks.get(i) + "\n"))
@@ -146,7 +146,7 @@ public class TaskList {
         if (tasks.isEmpty()) {
             return "There are no tasks to archive. Please add a task!";
         } else {
-            String output = String.format("Archived %d tasks!", this.tasks.size());
+            String output = String.format("Archived %d tasks successfully!", this.tasks.size());
             this.tasks = new ArrayList<>();
             return output;
         }
@@ -159,7 +159,7 @@ public class TaskList {
      */
 
     private void validateIndex(int index) throws InvalidIndexException {
-        assert (index >= 0 && index < tasks.size()) : "Index must point to an existing task";
+        assert (index >= 0 && index < tasks.size()) : "Index must point to an existing task!";
         if (index < 0 || index >= tasks.size()) {
             throw new InvalidIndexException("Index does not match to a task!");
         }
